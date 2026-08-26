@@ -1,49 +1,9 @@
-import { Component, OnInit, effect, inject, signal } from '@angular/core';
-import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
-import { NavigationBar } from './navigation-bar/navigation-bar';
-import { ApiService, Note, Source } from './api.service';
-import { LoadingSpinner } from './components/loading-spinner/loading-spinner';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NavigationBar, LoadingSpinner],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
-  styleUrl: './app.css',
 })
-export class App implements OnInit {
-  protected readonly title = signal('zk');
-  protected readonly activeTab = signal<'notes' | 'sources'>('notes');
-
-  protected readonly notes = signal<Note[] | null>(null);
-  protected readonly sources = signal<Source[] | null>(null);
-
-  private readonly router = inject(Router);
-  private readonly route = inject(ActivatedRoute);
-  private readonly api = inject(ApiService);
-
-  constructor() {
-    effect(() => {
-      const tab = this.activeTab();
-      this.router.navigate([], {
-        relativeTo: this.route,
-        queryParams: { tab },
-        queryParamsHandling: 'merge',
-      });
-
-      if (tab === 'notes' && this.notes() === null) {
-        this.api.getNotes().subscribe((data) => this.notes.set(data));
-      }
-
-      if (tab === 'sources' && this.sources() === null) {
-        this.api.getSources().subscribe((data) => this.sources.set(data));
-      }
-    });
-  }
-
-  ngOnInit(): void {
-    const tab = this.route.snapshot.queryParamMap.get('tab');
-    if (tab === 'notes' || tab === 'sources') {
-      this.activeTab.set(tab);
-    }
-  }
-}
+export class App {}

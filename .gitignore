@@ -42,3 +42,6 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# Environments. Generate one in CI/CD and have your own for local dev.
+/src/environments/environment.ts
