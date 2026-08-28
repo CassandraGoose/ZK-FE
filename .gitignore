@@ -45,3 +45,4 @@ Thumbs.db
 
 # Environments. Generate one in CI/CD and have your own for local dev.
 /src/environments/environment.ts
+/src/environments/environment.prod.ts
