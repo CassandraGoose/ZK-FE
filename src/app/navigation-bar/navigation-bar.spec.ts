@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideAuth } from 'angular-auth-oidc-client';
 
+import { authConfig } from '../auth/auth.config';
 import { NavigationBar } from './navigation-bar';
 
 describe('NavigationBar', () => {
@@ -9,6 +11,7 @@ describe('NavigationBar', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [NavigationBar],
+      providers: [provideAuth(authConfig)],
     }).compileComponents();
 
     fixture = TestBed.createComponent(NavigationBar);
