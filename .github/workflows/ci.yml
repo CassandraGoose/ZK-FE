@@ -22,7 +22,7 @@ jobs:
           COGNITO_CLIENT_ID: ${{ secrets.COGNITO_CLIENT_ID }}
           COGNITO_DOMAIN: ${{ secrets.COGNITO_DOMAIN }}
       - name: Upload env artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: env
           path: src/environments/environment*.ts
